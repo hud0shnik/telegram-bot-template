@@ -12,18 +12,20 @@ import (
 )
 
 func main() {
-	log.Println("Config error: ")
+
 	// Инициализация конфига (токенов)
 	err := mods.InitConfig()
 	if err != nil {
 		log.Println("Config error: ", err)
 		return
 	}
+
 	// Url бота для отправки и приёма сообщений
 	botUrl := "https://api.telegram.org/bot" + viper.GetString("token")
 	offSet := 0
 
 	for {
+
 		// Получение апдейтов
 		updates, err := getUpdates(botUrl, offSet)
 		if err != nil {
@@ -42,6 +44,7 @@ func main() {
 }
 
 func getUpdates(botUrl string, offset int) ([]mods.Update, error) {
+
 	// Rest запрос для получения апдейтов
 	resp, err := http.Get(botUrl + "/getUpdates?offset=" + strconv.Itoa(offset))
 	if err != nil {
@@ -54,6 +57,7 @@ func getUpdates(botUrl string, offset int) ([]mods.Update, error) {
 	if err != nil {
 		return nil, err
 	}
+
 	var restResponse mods.TelegramResponse
 	err = json.Unmarshal(body, &restResponse)
 	if err != nil {
@@ -65,6 +69,7 @@ func getUpdates(botUrl string, offset int) ([]mods.Update, error) {
 
 // Обработчик сообщений
 func respond(botUrl string, update mods.Update) error {
+
 	// msg - текст полученного сообщения
 	msg := update.Message.Text
 
