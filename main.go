@@ -37,6 +37,7 @@ type BotMessage struct {
 
 // Функция для отправки сообщений пользователю
 func sendMessage(botUrl string, update Update, msg string) error {
+
 	// Запись того, что и куда отправить
 	botMessage := BotMessage{
 		ChatId: update.Message.Chat.ChatId,
@@ -65,18 +66,20 @@ func help(botUrl string, update Update) {
 }
 
 func main() {
-	log.Println("Config error: ")
+
 	// Инициализация конфига (токенов)
 	err := initConfig()
 	if err != nil {
 		log.Println("Config error: ", err)
 		return
 	}
+
 	// Url бота для отправки и приёма сообщений
 	botUrl := "https://api.telegram.org/bot" + viper.GetString("token")
 	offSet := 0
 
 	for {
+
 		// Получение апдейтов
 		updates, err := getUpdates(botUrl, offSet)
 		if err != nil {
@@ -94,7 +97,9 @@ func main() {
 	}
 }
 
+// Функция получения апдейтов
 func getUpdates(botUrl string, offset int) ([]Update, error) {
+
 	// Rest запрос для получения апдейтов
 	resp, err := http.Get(botUrl + "/getUpdates?offset=" + strconv.Itoa(offset))
 	if err != nil {
@@ -118,6 +123,7 @@ func getUpdates(botUrl string, offset int) ([]Update, error) {
 
 // Обработчик сообщений
 func respond(botUrl string, update Update) error {
+
 	// msg - текст полученного сообщения
 	msg := update.Message.Text
 
