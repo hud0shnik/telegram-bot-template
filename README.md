@@ -1,4 +1,4 @@
-# oneFileOnlyMessage - Вариант шаблона для простых ботов
+# ✈️ Вариант шаблона для простых ботов 🤖
 
 <h3 align="left">🛠 Стек технологий:</h3>
 <a href="https://telegram.org/" target="_blank"><img src="https://img.icons8.com/color/48/000000/telegram-app--v3.png" alt="telegram" width="40" height="40"/></a>
