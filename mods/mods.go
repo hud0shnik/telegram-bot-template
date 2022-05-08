@@ -59,7 +59,7 @@ func SendMessage(botUrl string, update Update, msg string) error {
 // Вывод списка всех команд
 func Help(botUrl string, update Update) {
 	SendMessage(botUrl, update, "Привет👋🏻, вот список команд:"+
-		"\n\n/command - команда 1")
+		"\n\n/hello - команда 1")
 }
 
 // Функция инициализации конфига (всех токенов)
