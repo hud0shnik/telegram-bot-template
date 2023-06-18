@@ -19,7 +19,7 @@ func Respond(botUrl string, update telegram.Update) error {
 		send.SendMsg(botUrl, id, "101!")
 		return nil
 	case "/help":
-		commands.Help(botUrl, update)
+		commands.Help(botUrl, id)
 		return nil
 	}
 

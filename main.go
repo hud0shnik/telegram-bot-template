@@ -2,23 +2,20 @@ package main
 
 import (
 	"log"
+	"os"
 	"tgBot/internal/handler"
 	"tgBot/internal/telegram"
 
-	"github.com/spf13/viper"
+	"github.com/joho/godotenv"
 )
 
 func main() {
 
-	// Инициализация конфига (токенов)
-	err := InitConfig()
-	if err != nil {
-		log.Println("Config error: ", err)
-		return
-	}
+	// Загрузка переменных окружения
+	godotenv.Load()
 
 	// Url бота для отправки и приёма сообщений
-	botUrl := "https://api.telegram.org/bot" + viper.GetString("token")
+	botUrl := "https://api.telegram.org/bot" + os.Getenv("TOKEN")
 	offSet := 0
 
 	for {
@@ -38,12 +35,4 @@ func main() {
 		// Вывод апдейтов в консоль для тестов
 		// fmt.Println(updates)
 	}
-}
-
-// Функция инициализации конфига (всех токенов)
-func InitConfig() error {
-	viper.AddConfigPath("configs")
-	viper.SetConfigName("config")
-
-	return viper.ReadInConfig()
 }

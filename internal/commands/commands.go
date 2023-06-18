@@ -2,11 +2,11 @@ package commands
 
 import (
 	"tgBot/internal/send"
-	"tgBot/internal/telegram"
 )
 
 // Вывод списка всех команд
-func Help(botUrl string, update telegram.Update) {
-	send.SendMsg(botUrl, update.Message.Chat.ChatId, "Привет👋🏻, вот список команд:"+
-		"\n\n/hello - команда 1")
+func Help(botUrl string, ChatId int) {
+	send.SendMsg(botUrl, ChatId, "Привет👋🏻, вот список команд:\n\n"+
+		"/help - список команд\n"+
+		"/hello - команда 1\n")
 }
