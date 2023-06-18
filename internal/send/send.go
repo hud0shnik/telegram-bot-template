@@ -3,8 +3,9 @@ package send
 import (
 	"bytes"
 	"encoding/json"
-	"log"
 	"net/http"
+
+	"github.com/sirupsen/logrus"
 )
 
 // Структура для отправки сообщения
@@ -38,14 +39,14 @@ func SendMsg(botUrl string, chatId int, msg string) error {
 		ParseMode: "HTML",
 	})
 	if err != nil {
-		log.Printf("json.Marshal error: %s", err)
+		logrus.Printf("json.Marshal error: %s", err)
 		return err
 	}
 
 	// Отправка сообщения
 	_, err = http.Post(botUrl+"/sendMessage", "application/json", bytes.NewBuffer(buf))
 	if err != nil {
-		log.Printf("sendMessage error: %s", err)
+		logrus.Printf("sendMessage error: %s", err)
 		return err
 	}
 
@@ -61,14 +62,14 @@ func SendStck(botUrl string, chatId int, url string) error {
 		StickerUrl: url,
 	})
 	if err != nil {
-		log.Printf("json.Marshal error: %s", err)
+		logrus.Printf("json.Marshal error: %s", err)
 		return err
 	}
 
 	// Отправка стикера
 	_, err = http.Post(botUrl+"/sendSticker", "application/json", bytes.NewBuffer(buf))
 	if err != nil {
-		log.Printf("sendSticker error: %s", err)
+		logrus.Printf("sendSticker error: %s", err)
 		return err
 	}
 
@@ -86,14 +87,14 @@ func SendPict(botUrl string, chatId int, photoUrl, caption string) error {
 		ParseMode: "HTML",
 	})
 	if err != nil {
-		log.Printf("json.Marshal error: %s", err)
+		logrus.Printf("json.Marshal error: %s", err)
 		return err
 	}
 
 	// Отправка картинки
 	_, err = http.Post(botUrl+"/sendPhoto", "application/json", bytes.NewBuffer(buf))
 	if err != nil {
-		log.Printf("sendPhoto error: %s", err)
+		logrus.Printf("sendPhoto error: %s", err)
 		return err
 	}
 

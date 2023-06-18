@@ -1,15 +1,21 @@
 package main
 
 import (
-	"log"
 	"os"
 	"tgBot/internal/handler"
 	"tgBot/internal/telegram"
+	"time"
 
 	"github.com/joho/godotenv"
+	"github.com/sirupsen/logrus"
 )
 
 func main() {
+
+	// Настройка логгера
+	logrus.SetFormatter(&logrus.JSONFormatter{
+		TimestampFormat: time.DateTime,
+	})
 
 	// Загрузка переменных окружения
 	godotenv.Load()
@@ -23,7 +29,7 @@ func main() {
 		// Получение апдейтов
 		updates, err := telegram.GetUpdates(botUrl, offSet)
 		if err != nil {
-			log.Println("Something went wrong: ", err)
+			logrus.Println("Something went wrong: ", err)
 		}
 
 		// Обработка апдейтов
