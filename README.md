@@ -10,9 +10,9 @@
 <!-- Visual Studio Code -->
 <a href="https://code.visualstudio.com/" target="_blank">
 <img src="https://img.icons8.com/fluent/48/000000/visual-studio-code-2019.png" alt="vs code" width="40" height="40"/></a>
-<!-- Heroku -->
-<a href="https://www.heroku.com/" target="_blank">
-<img src="https://img.icons8.com/color/48/000000/heroku.png" alt="heroku" width="40" height="40"/></a>
+<!-- Docker -->
+<a href="https://github.com/hud0shnik/golang-to-do" >
+<img src="https://img.icons8.com/fluency/48/000000/docker.png" alt="Docker" width="40" height="40"/></a>
 
 <h3 align="left">📄 О проекте:</h3>
 Пустой шаблон для разработки Telegram-бота на Go 
