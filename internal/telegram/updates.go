@@ -7,35 +7,39 @@ import (
 	"strconv"
 )
 
-// Структуры для работы с Telegram API
-
-type TelegramResponse struct {
+// telegramResponse - структура ответа
+type telegramResponse struct {
 	Result []Update `json:"result"`
 }
 
+// Update - структура обновления
 type Update struct {
 	UpdateId int     `json:"update_id"`
-	Message  message `json:"message"`
+	Message  Message `json:"message"`
 }
 
-type message struct {
-	Chat    chat    `json:"chat"`
+// Message - структура сообщения
+type Message struct {
+	Chat    Chat    `json:"chat"`
 	Text    string  `json:"text"`
-	Sticker sticker `json:"sticker"`
+	Sticker Sticker `json:"sticker"`
 }
 
-type chat struct {
+// Sticker - структура стикера
+type Sticker struct {
+	FileId       string `json:"file_id"`
+	FileUniqueId string `json:"file_unique_id"`
+}
+
+// Chat - структура чата
+type Chat struct {
 	ChatId int `json:"id"`
 }
 
-type sticker struct {
-	File_id string `json:"file_id"`
-}
-
-// Функция получения апдейтов
+// GetUpdates - функция получения апдейтов
 func GetUpdates(botUrl string, offset int) ([]Update, error) {
 
-	// Rest запрос для получения апдейтов
+	// Запрос для получения апдейтов
 	resp, err := http.Get(botUrl + "/getUpdates?offset=" + strconv.Itoa(offset))
 	if err != nil {
 		return nil, err
@@ -47,11 +51,11 @@ func GetUpdates(botUrl string, offset int) ([]Update, error) {
 	if err != nil {
 		return nil, err
 	}
-	var restResponse TelegramResponse
-	err = json.Unmarshal(body, &restResponse)
-	if err != nil {
+	var restResponse telegramResponse
+	if err := json.Unmarshal(body, &restResponse); err != nil {
 		return nil, err
 	}
 
 	return restResponse.Result, nil
+
 }

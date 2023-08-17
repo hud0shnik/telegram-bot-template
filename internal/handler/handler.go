@@ -33,7 +33,7 @@ func Respond(botUrl string, update telegram.Update) {
 	} else {
 
 		// Проверка на стикер
-		if update.Message.Sticker.File_id != "" {
+		if update.Message.Sticker.FileId != "" {
 			telegram.SendStck(botUrl, chatId, "CAACAgIAAxkBAAIaImHkPqF8-PQVOwh_Kv1qQxIFpPyfAAJXAAOtZbwUZ0fPMqXZ_GcjBA")
 		} else {
 			// Если пользователь отправил не сообщение и не стикер:
