@@ -8,20 +8,20 @@ import (
 	"github.com/sirupsen/logrus"
 )
 
-// Структура для отправки сообщения
+// sendMessage - структура для отправки сообщения
 type sendMessage struct {
 	ChatId    int    `json:"chat_id"`
 	Text      string `json:"text"`
 	ParseMode string `json:"parse_mode"`
 }
 
-// Структура для отправки стикера
+// sendSticker - структура для отправки стикера
 type sendSticker struct {
 	ChatId     int    `json:"chat_id"`
 	StickerUrl string `json:"sticker"`
 }
 
-// Структура для отправки картинки
+// sendPhoto - структура для отправки картинки
 type sendPhoto struct {
 	ChatId    int    `json:"chat_id"`
 	PhotoUrl  string `json:"photo"`
@@ -29,13 +29,13 @@ type sendPhoto struct {
 	ParseMode string `json:"parse_mode"`
 }
 
-// Функция отправки сообщения
-func SendMsg(botUrl string, chatId int, msg string) error {
+// SendMsg - функция отправки сообщения
+func SendMsg(botUrl string, chatId int, text string) error {
 
 	// Формирование сообщения
 	buf, err := json.Marshal(sendMessage{
 		ChatId:    chatId,
-		Text:      msg,
+		Text:      text,
 		ParseMode: "HTML",
 	})
 	if err != nil {
@@ -51,15 +51,16 @@ func SendMsg(botUrl string, chatId int, msg string) error {
 	}
 
 	return nil
+
 }
 
-// Функция отправки стикера
-func SendStck(botUrl string, chatId int, url string) error {
+// SendStck - функция отправки стикера
+func SendStck(botUrl string, chatId int, stickerId string) error {
 
 	// Формирование стикера
 	buf, err := json.Marshal(sendSticker{
 		ChatId:     chatId,
-		StickerUrl: url,
+		StickerUrl: stickerId,
 	})
 	if err != nil {
 		logrus.Printf("json.Marshal error: %s", err)
@@ -74,9 +75,10 @@ func SendStck(botUrl string, chatId int, url string) error {
 	}
 
 	return nil
+
 }
 
-// Функция отправки картинки
+// SendPict - функция отправки картинки
 func SendPict(botUrl string, chatId int, photoUrl, caption string) error {
 
 	// Формирование картинки
@@ -99,4 +101,5 @@ func SendPict(botUrl string, chatId int, photoUrl, caption string) error {
 	}
 
 	return nil
+
 }
