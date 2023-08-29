@@ -6,7 +6,7 @@ import (
 	"tgBot/internal/telegram"
 )
 
-// Обработчик сообщений
+// Respond - обработчик сообщений
 func Respond(botUrl string, update telegram.Update) {
 
 	// Запись айди чата
