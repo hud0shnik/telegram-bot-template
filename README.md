@@ -20,13 +20,12 @@
 <h3 align="left">🐋 Запуск в Docker:</h3>
 
 Бота можно запустить в Docker-контейнере. Для этого нужно собрать проект:
-
 ```
 docker build -t tg_bot .
 ```
-И запустить:
 
+И запустить:
 ```
-docker run -e TOKEN="<token_value>" tg_bot
+docker run --name=telegram_bot -e TOKEN="<token_value>" tg_bot
 ```
 
